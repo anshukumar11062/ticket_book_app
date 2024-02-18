@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders</title>
+    <link rel="stylesheet" href="#" th:href="@{/css/bootstrap.css}" />
+    <link rel="stylesheet" href="#" th:href="@{/css/all.css}" />
+    <link rel="stylesheet" href="#" th:href="@{/css/index.css}" />
+    <link rel="stylesheet" href="#" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.0/css/dataTables.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="#" th:href="@{/css/dashboard.css}">
+</head>
+
+<body>
+
+    <div th:replace="fragements/nav :: header"></div>
+    
+    <br>
+    <!-- /////////////////////// DASHBOARD ///////////////////////////////////////////////// -->
+        <div class="container-fluid">
+            <form action="get-tickets-by-date" method="get">
+                <div class="form-group row">
+                  <div class="col-sm-2">
+                    <input type="date" class="form-control" id="date" name="date" th:value="${date}">
+                </div>
+                <div class="col-sm-2">
+                      <button type="submit" class="btn btn-success btn-sm">Filter Date</button>
+                  </div>
+                </div>
+              </form>
+            <div class="row">
+                <div class="col-xl-3 col-lg-3">
+                    <div class="card l-bg-cherry">
+                        <div class="card-statistic-3 p-4">
+                            <div class="card-icon card-icon-large"><i class="fas fa-shopping-cart"></i></div>
+                            <div class="mb-4">
+                                <h5 class="card-title mb-0">Total Movies</h5>
+                            </div>
+                            <div class="row align-items-center mb-2 d-flex">
+                                <div class="col-8">
+                                    <h2 class="d-flex align-items-center mb-0" th:text="${total_movies}">
+                                    </h2>
+                                </div>
+                            </div>
+                            <div class="progress mt-1 " data-height="8" style="height: 8px;">
+                                <div class="progress-bar l-bg-cyan" role="progressbar" data-width="25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3">
+                    <div class="card l-bg-blue-dark">
+                        <div class="card-statistic-3 p-4">
+                            <div class="card-icon card-icon-large"><i class="fas fa-users"></i></div>
+                            <div class="mb-4">
+                                <h5 class="card-title mb-0">Total Tickets</h5>
+                            </div>
+                            <div class="row align-items-center mb-2 d-flex">
+                                <div class="col-8">
+                                    <h4 class="d-flex align-items-center mb-0" th:text="${total_seats}">
+                                    </h4>
+                                    <span>(40 Seats Per Movie)</span>
+                                </div>
+                            </div>
+                            <div class="progress mt-1 " data-height="8" style="height: 8px;">
+                                <div class="progress-bar l-bg-green" role="progressbar" data-width="25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3">
+                    <div class="card l-bg-green-dark">
+                        <div class="card-statistic-3 p-4">
+                            <div class="card-icon card-icon-large"><i class="fas fa-ticket-alt"></i></div>
+                            <div class="mb-4">
+                                <h5 class="card-title mb-0">Sold Tickets</h5>
+                            </div>
+                            <div class="row align-items-center mb-2 d-flex">
+                                <div class="col-8">
+                                    <h2 class="d-flex align-items-center mb-0" th:text="${sold_tickets}">
+                                    </h2>
+                                </div>
+                            </div>
+                            <div class="progress mt-1 " data-height="8" style="height: 8px;">
+                                <div class="progress-bar l-bg-orange" role="progressbar" data-width="25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3">
+                    <div class="card l-bg-orange-dark">
+                        <div class="card-statistic-3 p-4">
+                            <div class="card-icon card-icon-large"><i class="fas fa-dollar-sign"></i></div>
+                            <div class="mb-4">
+                                <h5 class="card-title mb-0">Tickets Available</h5>
+                            </div>
+                            <div class="row align-items-center mb-2 d-flex">
+                                <div class="col-8">
+                                    <h2 class="d-flex align-items-center mb-0" th:text="${tickets_available}">
+                                        
+                                    </h2>
+                                </div>
+                            </div>
+                            <div class="progress mt-1 " data-height="8" style="height: 8px;">
+                                <div class="progress-bar l-bg-cyan" role="progressbar" data-width="25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-3 col-lg-3">
+                    <div class="card l-bg-orange-dark">
+                        <div class="card-statistic-3 p-4">
+                            <div class="card-icon card-icon-large"><i class="fas fa-dollar-sign"></i></div>
+                            <div class="mb-4">
+                                <h5 class="card-title mb-0">Revenue</h5>
+                            </div>
+                            <div class="row align-items-center mb-2 d-flex">
+                                <div class="col-8">
+                                    <h2 class="d-flex align-items-center mb-0" th:text="${today_total_revenue}">
+                                        
+                                    </h2>
+                                </div>
+                            </div>
+                            <div class="progress mt-1 " data-height="8" style="height: 8px;">
+                                <div class="progress-bar l-bg-cyan" role="progressbar" data-width="25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- /////////////////////// DASHBOARD ///////////////////////////////////////////////// -->
+
+    <div class="container-fluid">
+       <div class="card border-success">
+           <div class="card-header bg-warning">
+               Total Booked Tickets
+             </div>
+       <div class="card-body">
+            <table class="table table-striped" id="dataTable">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">CustomerName</th>
+                    <th scope="col">Movie</th>
+                    <th scope="col">TotalPrice</th>
+                    <th scope="col">BookingDate</th>
+                    <th scope="col">ShowDate</th>
+                    <th scope="col">ShowTime</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="order, iterationStat  : ${totalOrders}">
+                    <th scope="row" th:text="${iterationStat.count}"></th>
+                    <td th:text="${order.username}"></td>
+                    <td th:text="${order.movie_name}"></td>
+                    <td th:text="${order.total}"></td>
+                    <td th:text="${order.book_on_date}"></td>
+                    <td th:text="${order.show_on_date}"></td>
+                    <td th:text="${order.show_time}"></td>
+                    <td th:if="${order.is_cancelled == false}">
+                            <span class="badge badge-danger">Booked</span>
+                    </td>
+                    <td th:if="${order.is_cancelled == true}">
+                            <span class="badge badge-warning">Cancelled</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+       </div>
+       </div>
+    </div>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/2.0.0/js/dataTables.min.js"></script>
+<script>
+    $(document).ready( function () {
+        $('#dataTable').DataTable();
+        setDefaultDate();
+    } );
+
+    function setDefaultDate(){
+        // Get current date
+        var currentDate = new Date().toISOString().split('T')[0];
+
+        // Set current date as the default value and disable past dates
+        // document.getElementById("date").setAttribute("min", currentDate);
+        // document.getElementById("date").setAttribute("value", currentDate);  
+    }
+</script>
+</html>

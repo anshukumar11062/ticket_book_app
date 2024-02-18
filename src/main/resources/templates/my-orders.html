@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders</title>
+    <link rel="stylesheet" href="#" th:href="@{/css/bootstrap.css}" />
+    <link rel="stylesheet" href="#" th:href="@{/css/all.css}" />
+    <link rel="stylesheet" href="#" th:href="@{/css/index.css}" />
+    <link rel="stylesheet" href="#" th:href="@{/css/style.css}" />
+
+</head>
+
+<body>
+        <div th:replace="fragements/nav :: header"></div>
+
+    <br>
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Movie</th>
+                    <th scope="col">TotalPrice</th>
+                    <th scope="col">BookingDate</th>
+                    <th scope="col">ShowDate</th>
+                    <th scope="col">ShowTime</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="order, iterationStat  : ${myOrders}">
+                    <th scope="row" th:text="${iterationStat.count}"></th>
+                    <td th:text="${order.movieName}"></td>
+                    <td th:text="${order.total}"></td>
+                    <td th:text="${order.bookOnDate}"></td>
+                    <td th:text="${order.showOnDate}"></td>
+                    <td th:text="${order.showTime}"></td>
+                    <td th:if="${order.is_cancelled == false}">
+                        <form th:action="@{cancel-ticket}" method="post">
+                            <input type="hidden" name="orderId" id="orderId" th:value="${order.id}">
+                            <button type="submit" class="btn btn-sm btn-danger">Cancel Ticket</button>
+                        </form>
+                    </td>
+                    <td th:if="${order.is_cancelled == true}">
+                            <button type="submit" class="btn btn-sm btn-warning">Cancelled</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

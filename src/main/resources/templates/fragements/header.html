@@ -1,0 +1,28 @@
+<header>
+    <nav>
+        <p class="logo">
+            nrt<span>plex<span>
+        </p>
+
+        <i class="fa fa-bars" id="menu"></i>
+
+        <ul id="menu-box">
+            <div class="marker"></div>
+            <li><a class="nav-link" th:href="@{/}">Home</a></li>
+            <li>AboutUs</li>
+            <li th:if="${isAuthenticated && isAdmin==false}"><a class="nav-link" th:href="@{/my-orders}">My Orders</a></li>
+            <li th:if="${isAuthenticated && isAdmin}"><a class="nav-link" th:href="@{/get-all-tickets}">Customer Orders</a></li>
+            <li th:if="${isAuthenticated==false}"><a class="nav-link" th:href="@{/login}">Login</a></li>
+            <li th:if="${isAuthenticated}"><span>
+                    <p th:text="${username}"></p> <img
+                        src="https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=pexels-pixabay-220453.jpg&fm=jpg">
+                    <i class="fa fa-angle-down"></i>
+                </span></li>
+            <li th:if="${isAuthenticated}"><a class="nav-link" th:href="@{/logout}">Logout</a></li>
+        </ul>
+
+    </nav>
+
+    <!---slider--->
+
+</header>

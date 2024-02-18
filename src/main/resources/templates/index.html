@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Ticket Booking</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!---font icon CDN----->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="#" th:href="@{/css/style.css}" />
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+</head>
+
+<body>
+   
+    <div th:replace="fragements/header :: header"></div>
+
+    <section>
+        <div class="filter-search-box">
+
+            <div class="filters-box">
+
+            </div>
+
+            <div class="search-filters">
+                <input type="text" placeholder="Search by name...">
+                <i class="fa fa-search"></i>
+            </div>
+
+            <div class="search-bar">
+                <div class="bar"></div>
+            </div>
+
+        </div>
+        <!----filter-search-box---->
+
+
+        <!-- Movie Card -->
+        <div class="movie-card-section">
+            <div class="card" th:each="movies : ${movieList}">
+                <form th:action="@{/booking}" method="get">
+                    <img th:src="${movies.image}" />
+                    <div class="card-content">
+                        <p class="movie-name" th:text="${movies.movieName}">
+                        </p>
+
+                        <div class="movie-info">
+                            <p class="time">09:00 <span class="d3">2D</span></p>
+                            <button class="book-button" type="submit" th:value="${movies.movieName}"
+                                name="movieName">Book Ticket</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        <!---movie-card--->
+
+        <div class="show">
+            <div class="show-bar">
+                <div class="bar"></div>
+            </div>
+        </div>
+        <!---bar--->
+
+
+    </section>
+
+    <footer>
+
+        <div class="logo-box">
+            <p class="logo">
+                nrt<span>plex</span>
+            </p>
+            <p><i class="fa fa-copyright"></i> 2001-2017, Ranchi Jharkhand</p>
+        </div>
+
+        <ul>
+            <li>main</li>
+            <li>schedlues</li>
+            <li>tickets</li>
+            <li>news</li>
+            <li>contact</li>
+        </ul>
+
+
+        <div class="socail-box">
+            <i class="fa fa-facebook-f"></i>
+            <i class="fa fa-twitter"></i>
+            <i class="fa fa-instagram"></i>
+        </div>
+
+    </footer>
+</body>
+
+</html>
