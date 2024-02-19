@@ -856,3 +856,16 @@ footer .socail-box .fa:hover {
     color: white;
     text-decoration: auto;
 }
+
+.seat-btn {
+    width: 50px;
+    margin-right: 1px;
+}
+
+.col-5.first {
+    margin-right: 90px !important;
+}
+
+.mt-106 {
+    margin-top: 106px !important;
+}
