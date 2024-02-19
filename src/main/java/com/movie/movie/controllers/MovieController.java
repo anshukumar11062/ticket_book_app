@@ -172,12 +172,14 @@ public class MovieController {
     @GetMapping("my-orders")
     public String myOrders(Model model, HttpSession session) {
         User user = (User) session.getAttribute("user");
+        LocalDate now = LocalDate.now();
         if (user == null) {
             return "redirect:/login";
         }
 
         List<OrderHistory> myOrderHistoryByUserId = orderHistoryRepo.findByUserId(user.getId());
         model.addAttribute("myOrders", myOrderHistoryByUserId);
+        model.addAttribute("now", now);
         return "my-orders";
     }
 

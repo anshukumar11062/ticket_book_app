@@ -23,4 +23,20 @@ public class DateConverter {
         return LocalDate.parse(dateString, formatter);
     }
 
+    /**
+     * @desc Get current date in format string
+     * @return
+     */
+    public String getCurrentDate() {
+        // Get current date
+        LocalDate currentDate = LocalDate.now();
+
+        // Format the date to "yyyy-MM-dd"
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String formattedDate = currentDate.format(formatter);
+
+        // Return the formatted date
+        return formattedDate;
+    }
+
 }

@@ -10,12 +10,30 @@
     <link rel="stylesheet" href="#" th:href="@{/css/index.css}" />
     <link rel="stylesheet" href="#" th:href="@{/css/style.css}" />
 
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
 </head>
 
 <body>
-        <div th:replace="fragements/nav :: header"></div>
+    <div th:replace="fragements/nav :: header"></div>
 
     <br>
+
+    <!-- Error Message -->
+    <div class="error" th:if="${error}">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <p th:text="${error}"></p>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+
     <div class="container">
         <table class="table table-striped">
             <thead>
@@ -40,11 +58,12 @@
                     <td th:if="${order.is_cancelled == false}">
                         <form th:action="@{cancel-ticket}" method="post">
                             <input type="hidden" name="orderId" id="orderId" th:value="${order.id}">
-                            <button type="submit" class="btn btn-sm btn-danger">Cancel Ticket</button>
+                            <button type="submit" class="btn btn-sm btn-danger"
+                                onclick="return confirm('Are You Sure to Cancel the Ticket')">Cancel Ticket</button>
                         </form>
                     </td>
                     <td th:if="${order.is_cancelled == true}">
-                            <button type="submit" class="btn btn-sm btn-warning">Cancelled</button>
+                        <button type="submit" class="btn btn-sm btn-warning">Cancelled</button>
                     </td>
                 </tr>
             </tbody>
