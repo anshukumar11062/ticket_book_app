@@ -5,9 +5,16 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+/**
+ * | Author - Anshu Kumar
+ * | Created On - 17/02/2024
+ * | Seat No table schema definition
+ * | Status - Closed
+ */
+
 @Entity
 public class SeatSeatNo {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -39,7 +46,5 @@ public class SeatSeatNo {
     public void setSeatNo(String seatNo) {
         this.seatNo = seatNo;
     }
-
-    
 
 }

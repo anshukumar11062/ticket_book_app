@@ -1,19 +1,20 @@
 package com.movie.movie.entities;
 
-import java.util.List;
-
 import com.movie.movie.DAO.UserType;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+
+/**
+ * | Author - Anshu Kumar
+ * | Created On - 17/02/2024
+ * | User table schema definition
+ * | Status - Closed
+ */
 
 @Entity(name = "user")
 public class User {
@@ -71,5 +72,5 @@ public class User {
     public void setUserType(UserType userType) {
         this.userType = userType;
     }
-    
+
 }

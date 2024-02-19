@@ -1,8 +1,14 @@
 package com.movie.movie.DTO;
 
+/**
+ * | Author - Anshu Kumar
+ * | Created On - 17/02/2024
+ * | Response paramets to get the seats
+ * | Status - Closed
+ */
 
 public class GetSeatRes {
-    
+
     private Integer id;
     private String seatNo;
 
@@ -11,9 +17,8 @@ public class GetSeatRes {
         this.seatNo = seatNo;
     }
 
-
-    public GetSeatRes(String seatNo){
-        this.seatNo=seatNo;
+    public GetSeatRes(String seatNo) {
+        this.seatNo = seatNo;
     }
 
     public String getSeatNo() {
@@ -32,6 +37,4 @@ public class GetSeatRes {
         this.id = id;
     }
 
-    
-    
 }

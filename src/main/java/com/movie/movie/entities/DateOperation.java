@@ -10,6 +10,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
+/**
+ * | Author - Anshu Kumar
+ * | Created On - 17/02/2024
+ * | Date operation table schema definition
+ * | Status - Closed
+ */
+
 @Entity
 public class DateOperation {
 

@@ -7,6 +7,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+/**
+ * | Author - Anshu Kumar
+ * | Created On - 17/02/2024
+ * | Movie Masters table schema definition
+ * | Status - Closed
+ */
+
 @Entity
 @Table(name = "movie_masters")
 public class MovieMaster {

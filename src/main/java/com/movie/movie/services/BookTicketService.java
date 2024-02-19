@@ -32,6 +32,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * | Author - Anshu Kumar
+ * | Created On - 17/02/2024
+ * | Description - Containing all the business logics for ticket bookings, List
+ * all the tickets
+ * | Status - Closed
+ */
+
 @Service
 public class BookTicketService {
 
@@ -63,10 +71,10 @@ public class BookTicketService {
         LocalDate currentDate = LocalDate.now();
         DateOperation dateOps = new DateOperation();
         OrderHistory eOrderHistory = new OrderHistory();
-        String dateString=seat.getBookDate();
-        SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd");
+        String dateString = seat.getBookDate();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date myDate;
-        Seat eSeat=new Seat();
+        Seat eSeat = new Seat();
 
         // Derivative Assignments ======================================================
 
@@ -77,7 +85,6 @@ public class BookTicketService {
         dateOps.setShowTime(movieTime);
         dateOpsRepo.save(dateOps);
 
-
         // Calculate Total Seat Price
         for (String item : seat.getSeatNo()) {
             sumTotalPrice += seatPrice;
@@ -85,7 +92,6 @@ public class BookTicketService {
         }
         System.out.println(sumTotalPrice);
 
-        
         // Save Seat
         eSeat.setDateOperationId(dateOps.getId());
         eSeat.setTotal(sumTotalPrice);
@@ -100,7 +106,7 @@ public class BookTicketService {
         eOrderHistory.setMovieName(movieName);
         eOrderHistory.setUserId(user.getId());
         eOrderHistory.setShowTime(movieTime);
-        
+
         try {
             myDate = formatter.parse(dateString);
             eOrderHistory.setShowOnDate(myDate);
@@ -110,26 +116,26 @@ public class BookTicketService {
             seatRepository.save(eSeat);
 
             // Insert Into Order History Seat and Seat Price
-            for(String item : seat.getSeatNo()){
-                OrderHistorySeat orderHistorySeat=new OrderHistorySeat();
+            for (String item : seat.getSeatNo()) {
+                OrderHistorySeat orderHistorySeat = new OrderHistorySeat();
                 orderHistorySeat.setOrderHistoryId(eOrderHistory.getId());
                 orderHistorySeat.setSeat(item);
                 orderHistorySeatRepo.save(orderHistorySeat);
 
                 // Insert Seat Price
-                OrderHistoryPrice orderHistoryPrice=new OrderHistoryPrice();
+                OrderHistoryPrice orderHistoryPrice = new OrderHistoryPrice();
                 orderHistoryPrice.setOrderHistoryId(eOrderHistory.getId());
                 orderHistoryPrice.setPrice(seatPrice);
                 orderHistoryPriceRepo.save(orderHistoryPrice);
 
                 // Insert Seat No
-                SeatSeatNo eSeatSeatNo=new SeatSeatNo();
+                SeatSeatNo eSeatSeatNo = new SeatSeatNo();
                 eSeatSeatNo.setSeatId(eSeat.getId());
                 eSeatSeatNo.setSeatNo(item);
                 seatSeatNoRepo.save(eSeatSeatNo);
 
                 // Insert Seat Price
-                SeatSeatPrice eSeatSeatPrice=new SeatSeatPrice();
+                SeatSeatPrice eSeatSeatPrice = new SeatSeatPrice();
                 eSeatSeatPrice.setPrice(seatPrice);
                 eSeatSeatPrice.setSeatId(eSeat.getId());
                 seatSeatPriceRepo.save(eSeatSeatPrice);
@@ -139,26 +145,25 @@ public class BookTicketService {
             return true;
         } catch (ParseException e) {
             // TODO Auto-generated catch block
-           return false;
+            return false;
         }
     }
-
 
     /**
      * | Get All the Dashboard Reports and Customer
      */
-    public boolean getAllTickets(Model model,HttpSession session,String date){
+    public boolean getAllTickets(Model model, HttpSession session, String date) {
         User user = (User) session.getAttribute("user");
         if (user == null) {
             return false;
         }
 
-        if(user.getUserType()==UserType.ADMIN){
-            List<Map<String,Object>> getAllOrderHistory=orderHistoryRepo.getAllOrders();
-            model.addAttribute("totalOrders",getAllOrderHistory);
+        if (user.getUserType() == UserType.ADMIN) {
+            List<Map<String, Object>> getAllOrderHistory = orderHistoryRepo.getAllOrders();
+            model.addAttribute("totalOrders", getAllOrderHistory);
 
             // Dashboard Records
-            List<Map<String,Object>> dashboardRecords=orderHistoryRepo.dashboardRecords(date);
+            List<Map<String, Object>> dashboardRecords = orderHistoryRepo.dashboardRecords(date);
             model.addAttribute("total_movies", dashboardRecords.get(0).get("total_movies"));
             model.addAttribute("total_seats", dashboardRecords.get(0).get("total_seats"));
             model.addAttribute("sold_tickets", dashboardRecords.get(0).get("sold_tickets"));
@@ -167,7 +172,7 @@ public class BookTicketService {
 
             model.addAttribute("date", date);
             return true;
-        }   
+        }
 
         return false;
     }

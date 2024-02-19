@@ -5,13 +5,20 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+/**
+ * | Author - Anshu Kumar
+ * | Created On - 17/02/2024
+ * | Order History Seat table schema definition
+ * | Status - Closed
+ */
+
 @Entity
 public class OrderHistorySeat {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     private Long orderHistoryId;
 
     private String seat;
@@ -40,5 +47,4 @@ public class OrderHistorySeat {
         this.seat = seat;
     }
 
-    
 }

@@ -6,6 +6,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+/**
+ * | Author - Anshu Kumar
+ * | Created On - 17/02/2024
+ * | Seat table schema definition
+ * | Status - Closed
+ */
+
 @Entity
 public class Seat {
 
@@ -24,38 +31,49 @@ public class Seat {
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
+
     public double getTotal() {
         return total;
     }
+
     public void setTotal(double total) {
         this.total = total;
     }
+
     public Long getUserId() {
         return userId;
     }
+
     public void setUserId(Long userId) {
         this.userId = userId;
     }
+
     public Long getDateOperationId() {
         return dateOperationId;
     }
+
     public void setDateOperationId(Long dateOperationId) {
         this.dateOperationId = dateOperationId;
     }
+
     public String getMovieName() {
         return movieName;
     }
+
     public void setMovieName(String movieName) {
         this.movieName = movieName;
     }
+
     public Long getOrderHistoryId() {
         return orderHistoryId;
     }
+
     public void setOrderHistoryId(Long orderHistoryId) {
         this.orderHistoryId = orderHistoryId;
     }
-    
+
 }
